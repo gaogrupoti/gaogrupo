@@ -1,10 +1,8 @@
-
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pesquisa de Clima - GAO Lavanderia</title>
-  <form id="formClima" method="POST" action="https://script.google.com/macros/s/AKfycbwB-Jubgc0dLpToD0CLQzaSxp4dGdFtwBB5PTDj1TnvFARMHcRvQOdxi3BE-wKW68mtgw/exec">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
     * {
@@ -131,7 +129,7 @@
   <div class="container" id="formularioContainer">
     <h1><i class="fas fa-users"></i> Pesquisa de Clima Organizacional</h1>
     <p class="intro">Esta pesquisa tem como objetivo mapear a percepção dos colaboradores sobre o ambiente de trabalho, a cultura organizacional, a atuação da liderança e os fatores que impactam diretamente a motivação e produtividade da equipe.<br><br>🔒 Esta é uma pesquisa <strong>100% anônima</strong>. Nenhuma resposta será associada ao seu nome ou cargo.</p>
-    <form id="formClima">
+    <form id="formClima" method="POST" action="https://script.google.com/macros/s/AKfycbyvLkj0zjdzVZWN7nMhhfattjoWE1e0Bem2IIJ2vJwcncrmY_38PrzQwBVnEfKeB60imA/exec">
 	<div id="botoesFinal" class="hidden">
   <button id="btnSim" type="submit">Enviar Respostas</button>
   <a id="btnNao" href="agradecimento.html">
@@ -298,25 +296,21 @@
     <p class="confirm-text">Sua resposta foi registrada com sucesso.<br><strong>Esta pesquisa é 100% anônima</strong> e será usada apenas para melhorias internas.</p>
   </div>
   <script>
-  const selectParticipa = document.getElementById('participa');
-  const parte2 = document.getElementById('parte2');
-  const botoesFinal = document.getElementById('botoesFinal');
-  const formulario = document.getElementById('formClima');
-  const btnNao = document.getElementById('btnNao');
+  document.addEventListener('DOMContentLoaded', function () {
+    const participaSelect = document.getElementById('participa');
+    const parte2 = document.getElementById('parte2');
+    const botoesFinal = document.getElementById('botoesFinal');
 
-  selectParticipa.addEventListener('change', function () {
-    if (this.value === 'Sim') {
-      parte2.classList.remove('hidden');
-      botoesFinal.classList.remove('hidden');
-      btnNao.classList.add('hidden'); // esconde o botão de não
-    } else if (this.value === 'Não') {
-      parte2.classList.add('hidden');
-      botoesFinal.classList.remove('hidden');
-      btnNao.classList.remove('hidden');
-      btnNao.innerHTML = '<button type="button">Encerrar</button>';
-    } else {
-      parte2.classList.add('hidden');
-      botoesFinal.classList.add('hidden');
+    participaSelect.addEventListener('change', function () {
+      if (this.value === 'Sim') {
+        parte2.classList.remove('hidden');
+        botoesFinal.classList.remove('hidden');
+      } else if (this.value === 'Não') {
+        parte2.classList.add('hidden');
+        botoesFinal.classList.remove('hidden');
+      } else {
+        parte2.classList.add('hidden');
+        botoesFinal.classList.add('hidden');
     }
   });
 
