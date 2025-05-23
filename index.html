@@ -296,21 +296,25 @@
     <p class="confirm-text">Sua resposta foi registrada com sucesso.<br><strong>Esta pesquisa é 100% anônima</strong> e será usada apenas para melhorias internas.</p>
   </div>
   <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const participaSelect = document.getElementById('participa');
-    const parte2 = document.getElementById('parte2');
-    const botoesFinal = document.getElementById('botoesFinal');
+  const selectParticipa = document.getElementById('participa');
+  const parte2 = document.getElementById('parte2');
+  const botoesFinal = document.getElementById('botoesFinal');
+  const formulario = document.getElementById('formClima');
+  const btnNao = document.getElementById('btnNao');
 
-    participaSelect.addEventListener('change', function () {
-      if (this.value === 'Sim') {
-        parte2.classList.remove('hidden');
-        botoesFinal.classList.remove('hidden');
-      } else if (this.value === 'Não') {
-        parte2.classList.add('hidden');
-        botoesFinal.classList.remove('hidden');
-      } else {
-        parte2.classList.add('hidden');
-        botoesFinal.classList.add('hidden');
+  selectParticipa.addEventListener('change', function () {
+    if (this.value === 'Sim') {
+      parte2.classList.remove('hidden');
+      botoesFinal.classList.remove('hidden');
+      btnNao.classList.add('hidden'); // esconde o botão de não
+    } else if (this.value === 'Não') {
+      parte2.classList.add('hidden');
+      botoesFinal.classList.remove('hidden');
+      btnNao.classList.remove('hidden');
+      btnNao.innerHTML = '<button type="button">Encerrar</button>';
+    } else {
+      parte2.classList.add('hidden');
+      botoesFinal.classList.add('hidden');
     }
   });
 
