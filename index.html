@@ -1,9 +1,11 @@
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pesquisa de Clima - GAO Lavanderia</title>
-  <style>
+  <title>Pesquisa de Clima Organizacional</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+   <style>
     * {
       box-sizing: border-box;
       margin: 0;
@@ -121,20 +123,16 @@
       from { transform: translateY(40px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
-	
   </style>
 </head>
+
 <body>
-  <div class="container" id="formularioContainer">
+ <div class="container" id="formularioContainer">
     <h1><i class="fas fa-users"></i> Pesquisa de Clima Organizacional</h1>
     <p class="intro">Esta pesquisa tem como objetivo mapear a percepção dos colaboradores sobre o ambiente de trabalho, a cultura organizacional, a atuação da liderança e os fatores que impactam diretamente a motivação e produtividade da equipe.<br><br>🔒 Esta é uma pesquisa <strong>100% anônima</strong>. Nenhuma resposta será associada ao seu nome ou cargo.</p>
     <form id="formClima" method="POST" action="https://script.google.com/macros/s/AKfycbyvLkj0zjdzVZWN7nMhhfattjoWE1e0Bem2IIJ2vJwcncrmY_38PrzQwBVnEfKeB60imA/exec">
-	<div id="botoesFinal" class="hidden">
-  <button id="btnSim" type="submit">Enviar Respostas</button>
-  <a id="btnNao" href="agradecimento.html">
-  </a>
-</div>
-     <label for="setor">Setor</label>
+	
+    <label for="setor">Setor</label>
       <select id="setor" name="setor" required>
         <option value="">Selecione</option>
         <option value="Limpeza">Limpeza</option>
@@ -289,74 +287,63 @@
 		<label for="pergunta18">18. De 1 a 10, qual nota você daria ao seu departamento</label>
         <div id="estrelas3" class="estrelas"></div>
         <input type="hidden" name="pergunta18" id="respostaEstrela3" required>
-    </form>
-  <div class="confirmation hidden" id="mensagemConfirmacao">
-    <h2>🎉 Obrigado pela sua participação!</h2>
-    <p class="confirm-text">Sua resposta foi registrada com sucesso.<br><strong>Esta pesquisa é 100% anônima</strong> e será usada apenas para melhorias internas.</p>
-  </div>
+    </div>
+
+    <div id="botoesFinal" class="hidden">
+      <button type="submit">Enviar</button>
+    </div>
+  </form>
+
   <script>
-  const selectParticipa = document.getElementById('participa');
-  const parte2 = document.getElementById('parte2');
-  const botoesFinal = document.getElementById('botoesFinal');
-  const formulario = document.getElementById('formClima');
-  const btnNao = document.getElementById('btnNao');
+    document.getElementById("participa").addEventListener("change", function () {
+      const parte2 = document.getElementById("parte2");
+      const botoesFinal = document.getElementById("botoesFinal");
 
-  selectParticipa.addEventListener('change', function () {
-    if (this.value === 'Sim') {
-      parte2.classList.remove('hidden');
-      botoesFinal.classList.remove('hidden');
-      btnNao.classList.add('hidden'); // esconde o botão de não
-    } else if (this.value === 'Não') {
-      parte2.classList.add('hidden');
-      botoesFinal.classList.remove('hidden');
-      btnNao.classList.remove('hidden');
-      btnNao.innerHTML = '<button type="button">Encerrar</button>';
-    } else {
-      parte2.classList.add('hidden');
-      botoesFinal.classList.add('hidden');
-    }
-  });
+      if (this.value === "Sim") {
+        parte2.classList.remove("hidden");
+        botoesFinal.classList.remove("hidden");
+      } else {
+        parte2.classList.add("hidden");
+        botoesFinal.classList.remove("hidden");
+      }
+    });
 
-  // Lógica das estrelas
-  function gerarEstrelas(containerId, inputId) {
-    const container = document.getElementById(containerId);
-    const input = document.getElementById(inputId);
+    function criarEstrelas(containerId, inputId) {
+      const container = document.getElementById(containerId);
+      const input = document.getElementById(inputId);
 
-    for (let i = 1; i <= 10; i++) {
-      const estrela = document.createElement('span');
-      estrela.innerHTML = '★';
-      estrela.dataset.valor = i;
-      container.appendChild(estrela);
+      for (let i = 1; i <= 10; i++) {
+        const estrela = document.createElement("span");
+        estrela.innerHTML = "★";
+        estrela.dataset.valor = i;
 
-      estrela.addEventListener('mouseenter', () => {
-        [...container.children].forEach((e, idx) => {
-          e.classList.toggle('hover', idx < i);
+        estrela.addEventListener("mouseover", () => {
+          [...container.children].forEach((e, idx) => {
+            e.style.color = idx < i ? "gold" : "#ccc";
+          });
         });
-      });
 
-      estrela.addEventListener('mouseleave', () => {
-        [...container.children].forEach(e => e.classList.remove('hover'));
-      });
-
-      estrela.addEventListener('click', () => {
-        input.value = i;
-        [...container.children].forEach((e, idx) => {
-          e.classList.toggle('selecionada', idx < i);
+        estrela.addEventListener("mouseout", () => {
+          const val = parseInt(input.value) || 0;
+          [...container.children].forEach((e, idx) => {
+            e.style.color = idx < val ? "gold" : "#ccc";
+          });
         });
-      });
+
+        estrela.addEventListener("click", () => {
+          input.value = i;
+          [...container.children].forEach((e, idx) => {
+            e.style.color = idx < i ? "gold" : "#ccc";
+          });
+        });
+
+        container.appendChild(estrela);
+      }
     }
-  }
 
-  gerarEstrelas('estrelas', 'respostaEstrela');
-  gerarEstrelas('estrelas2', 'respostaEstrela2');
-  gerarEstrelas('estrelas3', 'respostaEstrela3');
-
-  // Prevent default form submit for agora (ajusta como preferir)
-  formulario.addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert("Respostas enviadas com sucesso! Obrigado por participar.");
-    // Aqui você pode adicionar lógica de envio real, como via fetch(), Google Forms, etc.
-  });
-</script>
+    criarEstrelas("estrelas", "respostaEstrela");
+    criarEstrelas("estrelas2", "respostaEstrela2");
+    criarEstrelas("estrelas3", "respostaEstrela3");
+  </script>
 </body>
 </html>
