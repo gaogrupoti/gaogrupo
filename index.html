@@ -251,7 +251,7 @@ button:focus {
 </div>
 
 <header class="header-topo">
-  <img src="https://drive.google.com/uc?export=view&id=1A4TDysDzD9C_xLDAHHmBPG1T5V0eSsrW" alt="Logo GAO" height="50" style="margin-bottom: 0.5rem;">
+ <img src="https://i.imgur.com/gE86s4d.png" alt="Logo GAO" height="50" style="margin-bottom: 0.5rem;">
   <h1 style="
     font-size: 1.6rem;
     color: #005baa;
@@ -519,6 +519,7 @@ button:focus {
 
 
 
+<!-- Substitua TODO o bloco <script> pelo código abaixo -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("formClima");
@@ -526,40 +527,69 @@ document.addEventListener("DOMContentLoaded", function () {
   const premio = document.getElementById("premio");
   const parte2 = document.getElementById("parte2");
   const botoesFinal = document.getElementById("botoesFinal");
+  const barraProgresso = document.querySelector(".progress-fixed");
+  const pergunta18 = form.querySelector('select[name="pergunta18"]');
+  const motivoContainer = document.getElementById("motivoContainer");
+  const motivoCampo = document.getElementById("motivo18");
 
-  // Função para ativar/desativar campos obrigatórios
   function setRequiredCamposExtras(ativo) {
     const campos = parte2.querySelectorAll("select, textarea, input[type=hidden]");
     campos.forEach(campo => {
-      if (ativo) {
-        campo.setAttribute("required", true);
-      } else {
-        campo.removeAttribute("required");
-      }
+      if (ativo) campo.setAttribute("required", true);
+      else campo.removeAttribute("required");
     });
   }
 
-  participa.addEventListener("change", function () {
-  if (this.value === "Sim") {
-    parte2.classList.remove("hidden");
-    botoesFinal.classList.remove("hidden");
-    barraProgresso.style.display = "block";
-    setRequiredCamposExtras(true);
-  } else if (this.value === "Não") {
-    parte2.classList.add("hidden");
-    botoesFinal.classList.remove("hidden");
-    barraProgresso.style.display = "none";
-    setRequiredCamposExtras(false);
-  } else {
-    parte2.classList.add("hidden");
-    botoesFinal.classList.add("hidden");
-    barraProgresso.style.display = "none";
-    setRequiredCamposExtras(false);
+  function atualizarProgresso() {
+    const perguntas = parte2.querySelectorAll("select[required], textarea[required], input[type=hidden][required]");
+    let respondidas = 0;
+
+    perguntas.forEach(campo => {
+      if ((campo.type === "hidden" || campo.tagName === "TEXTAREA") && campo.value.trim() !== "") {
+        respondidas++;
+      } else if (campo.value !== "") {
+        respondidas++;
+      }
+    });
+
+    const porcentagem = Math.floor((respondidas / perguntas.length) * 100);
+    document.getElementById("progressBar").style.width = `${porcentagem}%`;
   }
-});
 
+  document.querySelectorAll("select, textarea, input[type=hidden]").forEach(el => {
+    el.addEventListener("input", atualizarProgresso);
+  });
 
-  // estrelas
+  participa.addEventListener("change", function () {
+    if (this.value === "Sim") {
+      parte2.classList.remove("hidden");
+      botoesFinal.classList.remove("hidden");
+      barraProgresso.style.display = "block";
+      setRequiredCamposExtras(true);
+    } else if (this.value === "Não") {
+      parte2.classList.add("hidden");
+      botoesFinal.classList.remove("hidden");
+      barraProgresso.style.display = "none";
+      setRequiredCamposExtras(false);
+    } else {
+      parte2.classList.add("hidden");
+      botoesFinal.classList.add("hidden");
+      barraProgresso.style.display = "none";
+      setRequiredCamposExtras(false);
+    }
+  });
+
+  pergunta18.addEventListener("change", function () {
+    if (this.value === "Sim") {
+      motivoContainer.classList.remove("hidden");
+      motivoCampo.setAttribute("required", true);
+    } else {
+      motivoContainer.classList.add("hidden");
+      motivoCampo.removeAttribute("required");
+      motivoCampo.value = "";
+    }
+  });
+
   function criarEstrelas(containerId, inputId) {
     const container = document.getElementById(containerId);
     const input = document.getElementById(inputId);
@@ -581,119 +611,51 @@ document.addEventListener("DOMContentLoaded", function () {
   function atualizarEstrelas(container, quantidade) {
     const estrelas = container.querySelectorAll("span");
     estrelas.forEach((estrela, index) => {
-      if (index < quantidade) {
-        estrela.classList.add("selecionada");
-      } else {
-        estrela.classList.remove("selecionada");
-      }
+      estrela.classList.toggle("selecionada", index < quantidade);
     });
   }
 
   criarEstrelas("estrelas", "respostaEstrela");
   criarEstrelas("estrelas2", "respostaEstrela2");
   criarEstrelas("estrelas3", "respostaEstrela3");
-  
-  document.querySelectorAll("select, textarea, input[type=hidden]").forEach(el => {
-  el.addEventListener("input", atualizarProgresso);
-});
 
-     function atualizarProgresso() {
-   const perguntas = parte2.querySelectorAll("select[required], textarea[required], input[type=hidden][required]");
-   let respondidas = 0;
-
-   perguntas.forEach(campo => {
-    if (campo.type === "hidden" || campo.tagName === "TEXTAREA") {
-      if (campo.value.trim() !== "") respondidas++;
-    } else {
-      if (campo.value !== "") respondidas++;
-    }
-  });
-
-  const porcentagem = Math.floor((respondidas / perguntas.length) * 100);
-  document.getElementById("progressBar").style.width = `${porcentagem}%`;
-}
-const barraProgresso = document.querySelector(".progress-fixed");
-
-participa.addEventListener("change", function () {
-  if (this.value === "Sim") {
-    parte2.classList.remove("hidden");
-    botoesFinal.classList.remove("hidden");
-    barraProgresso.style.display = "block";
-    setRequiredCamposExtras(true);
-  } else if (this.value === "Não") {
-    parte2.classList.add("hidden");
-    botoesFinal.classList.remove("hidden");
-    barraProgresso.style.display = "none";
-    setRequiredCamposExtras(false);
-  } else {
-    parte2.classList.add("hidden");
-    botoesFinal.classList.add("hidden");
-    barraProgresso.style.display = "none";
-    setRequiredCamposExtras(false);
-  }
-});
-
-   const pergunta18 = form.querySelector('select[name="pergunta18"]');
-   const motivoContainer = document.getElementById("motivoContainer");
-   const motivoCampo = document.getElementById("motivo18");
-
-  pergunta18.addEventListener("change", function () {
-  if (this.value === "Sim") {
-    motivoContainer.classList.remove("hidden");
-    motivoCampo.setAttribute("required", true);
-  } else {
-    motivoContainer.classList.add("hidden");
-    motivoCampo.removeAttribute("required");
-    motivoCampo.value = ""; // limpa se mudar pra "Não"
-  }
-  });
-form.addEventListener("submit", function (e) {
+  form.addEventListener("submit", function (e) {
     e.preventDefault();
 
     const participaValor = participa.value;
     const premioValor = premio.value;
 
-    const formData = new FormData();
-    formData.append("setor", document.getElementById("setor").value);
-    formData.append("tempo", document.getElementById("tempo").value);
-    formData.append("participa", participaValor);
+    const formData = new FormData(form);
 
-    if (participaValor === "Sim") {
-      const camposExtras = form.querySelectorAll("select, textarea, input[type=hidden]");
-      camposExtras.forEach(campo => {
-        if (!formData.has(campo.name) && campo.value !== "") {
-          formData.append(campo.name, campo.value);
-        }
-      });
-    }
+    document.getElementById("loadingOverlay").style.display = "flex";
 
-    
-	document.getElementById("loadingOverlay").style.display = "flex";
-	fetch(form.action, {
+    fetch(form.action, {
       method: "POST",
       body: formData,
     })
-    .then(response => {
-      if (!response.ok) throw new Error("Erro no envio");
-      return response.text();
-    })
-    .then(() => {
-      if (participaValor === "Sim" && premioValor === "Sim") {
-        window.location.href = "https://gaogrupoti.github.io/gaolavanderia/";
-      } else {
-        document.getElementById("formularioContainer").classList.add("hidden");
-        document.getElementById("mensagemAgradecimento").classList.remove("hidden");
-      }
-    })
-    .catch(error => {
-      alert("Erro ao enviar. Tente novamente.");
-      console.error(error);
-	  document.getElementById("loadingOverlay").style.display = "none";
-
-    });
+      .then(response => {
+        if (!response.ok) throw new Error("Erro no envio");
+        return response.text();
+      })
+      .then(() => {
+        if (participaValor === "Sim" && premioValor === "Sim") {
+          window.location.href = "https://gaogrupoti.github.io/gaolavanderia/";
+        } else {
+          document.getElementById("formularioContainer").classList.add("hidden");
+          const msg = document.getElementById("mensagemAgradecimento");
+          msg.innerHTML = `<h2 style="font-size:2rem; color:#005baa;">🎉 Obrigado!</h2><p style="font-size:1.2rem;">Sua resposta foi recebida com sucesso.</p>`;
+          msg.classList.remove("hidden");
+        }
+      })
+      .catch(error => {
+        alert("⚠️ Erro ao enviar. Verifique a conexão ou tente novamente.");
+        console.error(error);
+      })
+      .finally(() => {
+        document.getElementById("loadingOverlay").style.display = "none";
+      });
   });
 });
 </script>
-
 </body>
 </html>
