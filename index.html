@@ -3,33 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pesquisa de Clima Organizacional</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <title>GAO LAVANDERIA</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
    <style>
+   #loadingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(255,255,255,0.8);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  font-size: 1.5rem;
+  color: #005baa;
+}
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
     body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #007BFF, #0056b3);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      animation: fadeInBody 1s ease;
-      flex-direction: column;
-    }
-    .container, .confirmation {
-      background-color: #fff;
-      border-radius: 16px;
-      padding: 2rem;
-      max-width: 800px;
-      width: 90%;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      animation: slideUp 0.8s ease;
-      text-align: center;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #008ecc, #006fa6);
+  background-attachment: fixed;
+  background-size: 300% 300%;
+  background-repeat: no-repeat;
+  animation: parallaxMove 20s ease infinite;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  flex-direction: column;
+}
+
+    .container {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2.5rem;
+  max-width: 800px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  animation: slideUp 0.8s ease;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
     }
     h1 {
       color: #005baa;
@@ -112,25 +138,172 @@
     .estrelas span.selecionada {
       color: gold;
     }
-    .estrelas span.animar {
+    .estrelas span.animar .estrelas span {
+  font-size: 2rem;
+  color: #ccc;
+  cursor: pointer;
+  transition: transform 0.3s, color 0.3s;
+}
+.estrelas span.selecionada {
+  color: #ffca28;
+}
+.estrelas span:hover {
+  transform: scale(1.2);
+  color: #ffc107;
+}
+ {
       transform: scale(1.4);
     }
+	
     @keyframes fadeInBody {
       from { opacity: 0; }
       to { opacity: 1; }
     }
+	
+	@keyframes parallaxMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
     @keyframes slideUp {
       from { transform: translateY(40px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
-  </style>
-</head>
+	 to {
+     transform: translateY(0%);
+     opacity: 1;
+    }
+    }
+	.progress-fixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: white;
+  padding: 8px 0;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+}
 
+.progress-container {
+  max-width: 800px;
+  margin: 0 auto;
+  height: 14px;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: #005baa;
+  transition: width 0.4s ease;
+  border-radius: 8px;
+}
+
+    body { font-family: sans-serif; }
+	.header-topo {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  padding: 1rem;
+  z-index: 100;
+}
+.container {
+  margin-top: 120px; /* espaço para o cabeçalho fixo */
+}
+form h2 {
+  margin-top: 2rem;
+  background-color: #eef6ff;
+  padding: 0.6rem 1rem;
+  border-left: 5px solid #005baa;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  text-align: left;
+  color: #003f7d;
+}
+
+
+  </style>
+  
+  input, select, textarea {
+  transition: all 0.3s ease;
+  background-color: #f5f9ff;
+}
+input:hover, select:hover, textarea:hover {
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.2);
+}
+button:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(0,91,170,0.4);
+}
+
+</head>
 <body>
+<div id="loadingOverlay" style="display:none;">
+  Enviando...
+</div>
+
+<header class="header-topo">
+  <img src="GAOLOGO.png" alt="Logo GAO" height="50" style="margin-bottom: 0.5rem;">
+  <h1 style="
+    font-size: 1.6rem;
+    color: #005baa;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-top: 0.5rem;
+    text-transform: uppercase;
+    font-family: 'Segoe UI', 'Inter', sans-serif;
+  ">
+    Pesquisa de Clima Organizacional
+  </h1>
+</header>
+
+
  <div class="container" id="formularioContainer">
-    <h1><i class="fas fa-users"></i> Pesquisa de Clima Organizacional</h1>
-    <p class="intro">Esta pesquisa tem como objetivo mapear a percepção dos colaboradores sobre o ambiente de trabalho, a cultura organizacional, a atuação da liderança e os fatores que impactam diretamente a motivação e produtividade da equipe.<br><br>🔒 Esta é uma pesquisa <strong>100% anônima</strong>. Nenhuma resposta será associada ao seu nome ou cargo.</p>
-    <form id="formClima" method="POST" action="https://script.google.com/macros/s/AKfycbyvLkj0zjdzVZWN7nMhhfattjoWE1e0Bem2IIJ2vJwcncrmY_38PrzQwBVnEfKeB60imA/exec">
+    <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+  <h2 style="color: #005baa; font-size: 1.6rem; margin-bottom: 1rem;">A GENTE SÓ EVOLUI COM VOCÊ!</h2>
+  <p class="intro" style="margin-bottom: 1.5rem;">
+    <strong>Sua voz constrói a GAO!</strong>
+  </p>
+
+  <p class="intro">
+    Na <strong>GAO Lavanderia</strong>, acreditamos que o coração do nosso negócio são as pessoas.
+  </p>
+
+  <p class="intro">
+    Esta pesquisa foi criada para entender, de forma clara e direta, como você percebe o ambiente de trabalho, a atuação da liderança, a cultura da empresa e tudo aquilo que influencia sua motivação e desempenho no dia a dia.
+  </p>
+
+  <p class="intro">
+    Nosso objetivo é mapear <strong>pontos fortes</strong> e identificar <strong>oportunidades de melhoria</strong>, mantendo um ambiente:
+    respeitoso, justo, produtivo e alinhado com os valores que construíram a história da GAO:
+    <br><em>seriedade, compromisso e espírito de equipe.</em>
+  </p>
+
+  <p class="intro">
+    🔒 <strong>100% ANÔNIMA:</strong><br>
+    Nenhuma resposta será vinculada ao seu nome ou cargo. Os dados serão analisados de forma geral e usados exclusivamente pelo setor de <strong>Gente & Gestão</strong>.
+  </p>
+
+  <p class="intro">
+    ✨ <strong>Essa é a sua chance de contribuir com a evolução da empresa!</strong><br><br>
+    Seja sincero(a), objetivo(a) e pense no coletivo. Cada resposta fortalece a base que sustenta nosso trabalho.
+  </p>
+
+  <p class="intro" style="margin-top: 1.5rem;">
+    <strong>Contamos com você!</strong><br>
+    <em>Juntos, vamos fazer da GAO Lavanderia um lugar cada vez melhor para se trabalhar.</em>
+  </p>
+</div>
+
+	<form id="formClima" method="POST" action="https://script.google.com/macros/s/AKfycbzLIEbXNcFudT3X1aR7JS11v7Z_NesJKYdzTb7BMqols3MLRqSVBm5vmC6vj5nemB8K-Q/exec">
 	
     <label for="setor">Setor</label>
       <select id="setor" name="setor" required>
@@ -144,18 +317,13 @@
         <option value="Administrativo">Administrativo</option>
       </select>
 
-      <label for="cargo">Cargo do Trabalhador</label>
-      <input type="text" id="cargo" name="cargo" required>
-
       <label for="tempo">Tempo de Empresa</label>
       <select id="tempo" name="tempo" required>
         <option value="">Selecione</option>
         <option value="1 a 4 meses">1 a 4 meses</option>
         <option value="5 a 11 meses">5 a 11 meses</option>
         <option value="1 a 3 anos">1 a 3 anos</option>
-        <option value="4 a 6 anos">4 a 6 anos</option>
-        <option value="7 a 10 anos">7 a 10 anos</option>
-        <option value="Acima de 10 anos">Acima de 10 anos</option>
+        <option value="4 a 5 anos">4 anos acima</option>
       </select>
 
       <label for="participa">Você deseja participar da pesquisa de clima organizacional?</label>
@@ -166,184 +334,366 @@
       </select>
 	  
       <div id="parte2" class="hidden">
-        <h2>🏛 Cultura e Valores Organizacionais</h2>
-      <label for="pergunta1">1. A Gao Lavanderia valoriza os colaboradores com treinamentos?</label>
+        <h2>🏛 Cultura e Pertencimento</h2>
+      <label for="pergunta1">1. Você sente que faz parte da empresa?</label>
       <select id="pergunta1" name="pergunta1" required>
 	    <option value="">Selecione</option>
         <option value="Sim">Sim</option>
-        <option value="Às vezes">Às vezes</option>
         <option value="Não">Não</option>
       </select>
 
-      <label for="pergunta2">2. Já percebeu ambiente negativo entre colaboradores e líderes?</label>
+      <label for="pergunta2">2. Os valores da empresa são claros no dia a dia?</label>
       <select id="pergunta2" name="pergunta2" required>
 	    <option value="">Selecione</option>
         <option value="Sim">Sim</option>
-        <option value="Às vezes">Às vezes</option>
         <option value="Não">Não</option>
       </select>
-
-      <h2>📢 Comunicação Interna</h2>
-      <label for="pergunta3">3. Comunicação entre adm. e colaboradores é boa?</label>
-      <select name="pergunta3" required>
+	  
+	    <label for="pergunta3">3. A empresa se preocupa com o bem-estar dos colaboradores?</label>
+      <select id="pergunta3" name="pergunta3" required>
 	    <option value="">Selecione</option>
         <option value="Sim">Sim</option>
-        <option value="Parcialmente">Parcialmente</option>
         <option value="Não">Não</option>
       </select>
 
-      <label for="pergunta4">4. Seu líder é claro ao delegar funções?</label>
-      <select name="pergunta4" required>
+      <h2>📢 Comunicação</h2>
+      <label for="pergunta4">4. A comunicação entre seu lider e você é clara?</label>
+      <select id="pergunta4" name="pergunta4" required>
 	    <option value="">Selecione</option>
         <option value="Sim">Sim</option>
-        <option value="Parcialmente">Parcialmente</option>
         <option value="Não">Não</option>
       </select>
 
-      <label for="pergunta5">5. Comunicação com seu líder é transparente?</label>
-      <select name="pergunta5" required>
+      <label for="pergunta5">5. Você se sente à vontade para dar feedbacks ou fazer sugestões?</label>
+      <select id="pergunta5" name="pergunta5" required>
 	    <option value="">Selecione</option>
         <option value="Sim">Sim</option>
-        <option value="Parcialmente">Parcialmente</option>
         <option value="Não">Não</option>
       </select>
 
-      <h2>⏱ Carga de Trabalho e Bem-Estar</h2>
-      <label for="pergunta6">6. O ambiente é agradável?</label>
-      <select name="pergunta6" required>8
+      <label for="pergunta6">6. Recebe informações importantes com antecedência e clareza?</label>
+      <select id="pergunta6" name="pergunta6" required>
 	    <option value="">Selecione</option>
         <option value="Sim">Sim</option>
-        <option value="Às vezes">Às vezes</option>
         <option value="Não">Não</option>
       </select>
 
-      <label for="pergunta">7. Você confia nos seus colegas?</label>
-      <select name="pergunta7" required>
+      <h2>🧭 Liderança</h2>
+      <label for="pergunta7">7. Seu líder demonstra respeito e escuta sua opinião?</label>
+      <select id="pergunta7" name="pergunta7" required>
 	    <option value="">Selecione</option>
         <option value="Sim">Sim</option>
-        <option value="Às vezes">Às vezes</option>
         <option value="Não">Não</option>
       </select>
 
-      <label for="pergunta">8. Se sente confortável com sua equipe?</label>
-      <select name="pergunta8"	required>
+      <label for="pergunta8">8. Você se sente apoiado(a) pelo seu líder nas dificuldades do dia a dia?</label>
+      <select id="pergunta8" name="pergunta8" required>
 	    <option value="">Selecione</option>
         <option value="Sim">Sim</option>
-        <option value="Às vezes">Às vezes</option>
         <option value="Não">Não</option>
       </select>
 
-      <label for="pergunta9">9. Sentiu que teve tarefas demais nas últimas semanas?</label>
-      <select name="pergunta9" required>
+      <label for="pergunta9">9. Seu líder reconhece seu esforço ou resultados?</label>
+      <select id="pergunta9" name="pergunta9" required>
 	    <option value="">Selecione</option>
         <option value="Sim">Sim</option>
-        <option value="Às vezes">Às vezes</option>
         <option value="Não">Não</option>
       </select>
-
-      <h2>🧭 Liderança e Suporte</h2>
-      <label for="pergunta10">10. Seu trabalho impacta sua vida pessoal?</label>
-      <select name="pergunta10" required>
+	  
+      <h2>🧱 Estrutura e Condições de Trabalho</h2>
+      <label for="pergunta10">10. As ferramentas e equipamentos de trabalho são adequados?</label>
+      <select id="pergunta10" name="pergunta10" required>
 	    <option value="">Selecione</option>
         <option value="Sim">Sim</option>
-        <option value="Parcialmente">Parcialmente</option>
         <option value="Não">Não</option>
       </select>
 
-      <label for="pergunta11">11. Pode contar com seu líder quando precisa?</label>
+      <label for="pergunta11">11. O ambiente físico de trabalho é seguro e confortável?</label>
       <select name="pergunta11" required>
 	    <option value="">Selecione</option>
         <option value="Sim">Sim</option>
-        <option value="Parcialmente">Parcialmente</option>
         <option value="Não">Não</option>
       </select>
 
-      <label for="pergunta12">12. Local oferece boas condições de trabalho?</label>
+      <h2>⏱ Carga de Trabalho e Rotina</h2>
+      <label for="pergunta12">12. Sua carga de trabalho é compatível com sua função?</label>
       <select name="pergunta12" required>
 	    <option value="">Selecione</option>
         <option value="Sim">Sim</option>
-        <option value="Parcialmente">Parcialmente</option>
         <option value="Não">Não</option>
       </select>
+	  
+	  <label for="pergunta13">13. Você consegue equilibrar trabalho e vida pessoal?</label>
+      <select name="pergunta13" required>
+	    <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+      </select>
+	  
+	  <label for="pergunta14">14. Sente-se sobrecarregado com frequência?</label>
+      <select name="pergunta14" required>
+	    <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+      </select>
+	  
+	  <h2>🚀 Crescimento e Reconhecimento</h2>
+	  <label for="pergunta15">15. Você vê oportunidades de crescimento dentro da empresa?</label>
+      <select name="pergunta15" required>
+	    <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+      </select>
+	  
+	  <label for="pergunta16">16. Já recebeu algum reconhecimento pelo seu desempenho?</label>
+      <select name="pergunta16" required>
+	    <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+      </select>
+	  
+	  <label for="pergunta17">17. A empresa investe em treinamentos ou desenvolvimento profissional?</label>
+      <select name="pergunta17" required>
+	    <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+      </select>
+	  
+	  <h2>🚨 Rotatividade e Insatisfação</h2>
+	  <label for="pergunta18">18. Já pensou em sair da empresa nos últimos 3 meses?</label>
+      <select name="pergunta18" required>
+	    <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+      </select>
+	  
+	  <div id="motivoContainer" class="hidden">
+      <label for="motivo18">Qual foi o principal motivo?</label>
+      <textarea name="motivo18" id="motivo18"></textarea>
+      </div>
+
+	  <label for="pergunta19">19. O que mais te desmotiva no trabalho atualmente?</label>
+      <textarea name="pergunta19"></textarea>
+		
         <h2>📝 Sugestões e Comentários</h2>
-        <label for="pergunta13">13. Elogios, críticas ou sugestões ao gerente:</label>
-        <textarea name="pergunta13"></textarea>
+        <label for="pergunta20">20. Deixe elogios, críticas ou sugestões para o(a) gerente do seu departamento:</label>
+        <textarea name="pergunta20"></textarea>
 
-        <label for="pergunta14">14. Ideias ou sugestões para a Diretoria:</label>
-        <textarea name="pergunta14"></textarea>
+        <label for="pergunta21">21. Ideias ou sugestões para a Diretoria:</label>
+        <textarea name="pergunta21"></textarea>
 
-        <label for="pergunta15">15. Comentário geral ou sugestão de melhoria:</label>
-        <textarea name="pergunta15"></textarea> 
+        <label for="pergunta22">22. Comentário geral ou sugestão de melhoria:</label>
+        <textarea name="pergunta22"></textarea> 
 		
 		<h2>📊 Avaliação da Empresa</h2>
-		<label for="pergunta16">16. De 1 a 10, qual a probabilidade de você indicar a empresa para um amigo?</label>
+		<label for="pergunta23">23. De 1 a 10, qual a probabilidade de você indicar a empresa para um amigo?</label>
         <div id="estrelas" class="estrelas"></div>
-        <input type="hidden" name="pergunta16" id="respostaEstrela" required>
+        <input type="hidden" name="pergunta23" id="respostaEstrela">
 		
-		<label for="pergunta17">17. De 1 a 10, como você avalia a empresa 'GAO LAVANDERIA'?</label>
+		<label for="pergunta24">24. De 1 a 10, como você avalia a empresa 'GAO LAVANDERIA'?</label>
         <div id="estrelas2" class="estrelas"></div>
-        <input type="hidden" name="pergunta17" id="respostaEstrela2" required>
+        <input type="hidden" name="pergunta24" id="respostaEstrela2" required>
 		
-		<label for="pergunta18">18. De 1 a 10, qual nota você daria ao seu departamento</label>
+		<label for="pergunta25">25. De 1 a 10, qual nota você daria ao seu departamento</label>
         <div id="estrelas3" class="estrelas"></div>
-        <input type="hidden" name="pergunta18" id="respostaEstrela3" required>
+        <input type="hidden" name="pergunta25" id="respostaEstrela3" required>
+		
+		<label for="premio">Você quer participar do prêmio incentivo?</label>
+        <select id="premio" name="premio" required>
+        <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+        </select>
+
     </div>
 
     <div id="botoesFinal" class="hidden">
       <button type="submit">Enviar</button>
     </div>
+	<div id="mensagemAgradecimento" class="hidden">
+    <h2>Obrigado!</h2>
+    <p>Sua resposta foi recebida com sucesso.</p>
+    </div>
   </form>
+  
 
-  <script>
-    document.getElementById("participa").addEventListener("change", function () {
-      const parte2 = document.getElementById("parte2");
-      const botoesFinal = document.getElementById("botoesFinal");
 
-      if (this.value === "Sim") {
-        parte2.classList.remove("hidden");
-        botoesFinal.classList.remove("hidden");
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("formClima");
+  const participa = document.getElementById("participa");
+  const premio = document.getElementById("premio");
+  const parte2 = document.getElementById("parte2");
+  const botoesFinal = document.getElementById("botoesFinal");
+
+  // Função para ativar/desativar campos obrigatórios
+  function setRequiredCamposExtras(ativo) {
+    const campos = parte2.querySelectorAll("select, textarea, input[type=hidden]");
+    campos.forEach(campo => {
+      if (ativo) {
+        campo.setAttribute("required", true);
       } else {
-        parte2.classList.add("hidden");
-        botoesFinal.classList.remove("hidden");
+        campo.removeAttribute("required");
       }
     });
+  }
 
-    function criarEstrelas(containerId, inputId) {
-      const container = document.getElementById(containerId);
-      const input = document.getElementById(inputId);
+  participa.addEventListener("change", function () {
+  if (this.value === "Sim") {
+    parte2.classList.remove("hidden");
+    botoesFinal.classList.remove("hidden");
+    barraProgresso.style.display = "block";
+    setRequiredCamposExtras(true);
+  } else if (this.value === "Não") {
+    parte2.classList.add("hidden");
+    botoesFinal.classList.remove("hidden");
+    barraProgresso.style.display = "none";
+    setRequiredCamposExtras(false);
+  } else {
+    parte2.classList.add("hidden");
+    botoesFinal.classList.add("hidden");
+    barraProgresso.style.display = "none";
+    setRequiredCamposExtras(false);
+  }
+});
 
-      for (let i = 1; i <= 10; i++) {
-        const estrela = document.createElement("span");
-        estrela.innerHTML = "★";
-        estrela.dataset.valor = i;
 
-        estrela.addEventListener("mouseover", () => {
-          [...container.children].forEach((e, idx) => {
-            e.style.color = idx < i ? "gold" : "#ccc";
-          });
-        });
+  // estrelas
+  function criarEstrelas(containerId, inputId) {
+    const container = document.getElementById(containerId);
+    const input = document.getElementById(inputId);
+    container.innerHTML = "";
+    for (let i = 1; i <= 10; i++) {
+      const estrela = document.createElement("span");
+      estrela.textContent = "★";
+      estrela.addEventListener("mouseenter", () => atualizarEstrelas(container, i));
+      estrela.addEventListener("mouseleave", () => atualizarEstrelas(container, input.value || 0));
+      estrela.addEventListener("click", () => {
+        input.value = i;
+        atualizarEstrelas(container, i);
+      });
+      container.appendChild(estrela);
+    }
+    atualizarEstrelas(container, input.value || 0);
+  }
 
-        estrela.addEventListener("mouseout", () => {
-          const val = parseInt(input.value) || 0;
-          [...container.children].forEach((e, idx) => {
-            e.style.color = idx < val ? "gold" : "#ccc";
-          });
-        });
-
-        estrela.addEventListener("click", () => {
-          input.value = i;
-          [...container.children].forEach((e, idx) => {
-            e.style.color = idx < i ? "gold" : "#ccc";
-          });
-        });
-
-        container.appendChild(estrela);
+  function atualizarEstrelas(container, quantidade) {
+    const estrelas = container.querySelectorAll("span");
+    estrelas.forEach((estrela, index) => {
+      if (index < quantidade) {
+        estrela.classList.add("selecionada");
+      } else {
+        estrela.classList.remove("selecionada");
       }
+    });
+  }
+
+  criarEstrelas("estrelas", "respostaEstrela");
+  criarEstrelas("estrelas2", "respostaEstrela2");
+  criarEstrelas("estrelas3", "respostaEstrela3");
+  
+  document.querySelectorAll("select, textarea, input[type=hidden]").forEach(el => {
+  el.addEventListener("input", atualizarProgresso);
+});
+
+     function atualizarProgresso() {
+   const perguntas = parte2.querySelectorAll("select[required], textarea[required], input[type=hidden][required]");
+   let respondidas = 0;
+
+   perguntas.forEach(campo => {
+    if (campo.type === "hidden" || campo.tagName === "TEXTAREA") {
+      if (campo.value.trim() !== "") respondidas++;
+    } else {
+      if (campo.value !== "") respondidas++;
+    }
+  });
+
+  const porcentagem = Math.floor((respondidas / perguntas.length) * 100);
+  document.getElementById("progressBar").style.width = `${porcentagem}%`;
+}
+const barraProgresso = document.querySelector(".progress-fixed");
+
+participa.addEventListener("change", function () {
+  if (this.value === "Sim") {
+    parte2.classList.remove("hidden");
+    botoesFinal.classList.remove("hidden");
+    barraProgresso.style.display = "block";
+    setRequiredCamposExtras(true);
+  } else if (this.value === "Não") {
+    parte2.classList.add("hidden");
+    botoesFinal.classList.remove("hidden");
+    barraProgresso.style.display = "none";
+    setRequiredCamposExtras(false);
+  } else {
+    parte2.classList.add("hidden");
+    botoesFinal.classList.add("hidden");
+    barraProgresso.style.display = "none";
+    setRequiredCamposExtras(false);
+  }
+});
+
+   const pergunta18 = form.querySelector('select[name="pergunta18"]');
+   const motivoContainer = document.getElementById("motivoContainer");
+   const motivoCampo = document.getElementById("motivo18");
+
+  pergunta18.addEventListener("change", function () {
+  if (this.value === "Sim") {
+    motivoContainer.classList.remove("hidden");
+    motivoCampo.setAttribute("required", true);
+  } else {
+    motivoContainer.classList.add("hidden");
+    motivoCampo.removeAttribute("required");
+    motivoCampo.value = ""; // limpa se mudar pra "Não"
+  }
+  });
+form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const participaValor = participa.value;
+    const premioValor = premio.value;
+
+    const formData = new FormData();
+    formData.append("setor", document.getElementById("setor").value);
+    formData.append("tempo", document.getElementById("tempo").value);
+    formData.append("participa", participaValor);
+
+    if (participaValor === "Sim") {
+      const camposExtras = form.querySelectorAll("select, textarea, input[type=hidden]");
+      camposExtras.forEach(campo => {
+        if (!formData.has(campo.name) && campo.value !== "") {
+          formData.append(campo.name, campo.value);
+        }
+      });
     }
 
-    criarEstrelas("estrelas", "respostaEstrela");
-    criarEstrelas("estrelas2", "respostaEstrela2");
-    criarEstrelas("estrelas3", "respostaEstrela3");
-  </script>
+    
+	document.getElementById("loadingOverlay").style.display = "flex";
+	fetch(form.action, {
+      method: "POST",
+      body: formData,
+    })
+    .then(response => {
+      if (!response.ok) throw new Error("Erro no envio");
+      return response.text();
+    })
+    .then(() => {
+      if (participaValor === "Sim" && premioValor === "Sim") {
+        window.location.href = "dados-premio.html";
+      } else {
+        document.getElementById("formularioContainer").classList.add("hidden");
+        document.getElementById("mensagemAgradecimento").classList.remove("hidden");
+      }
+    })
+    .catch(error => {
+      alert("Erro ao enviar. Tente novamente.");
+      console.error(error);
+	  document.getElementById("loadingOverlay").style.display = "none";
+
+    });
+  });
+});
+</script>
+
 </body>
 </html>
